@@ -32,7 +32,7 @@ void setup() {
  
   // setup display font
   font = createFont("Helvetica Bold", 16, true);
-  textFont(font, 12);
+  textFont(font, 16);
 }
 
 void launchSentances() {
@@ -50,7 +50,7 @@ void launchSentances() {
       l.ch = character;
       l.pos = new PVector(letterXOffset * i, -lineNum * letterYOffset-letterYOffset/4 ,0.0);
       l.vel = new PVector(0.0,0.5 + random(0,0.1),0.0);
-      l.col = color(random(255), random(255), random(255));
+      l.col = color(255,255,255);
       LetterList.add(l);
     }  
   }
