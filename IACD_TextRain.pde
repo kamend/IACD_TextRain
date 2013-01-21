@@ -25,7 +25,8 @@ void setup() {
 
   // initalizes video capture
   cap = new Capture(this, videoWidth, videoHeight);
-
+  cap.start();
+  
   // read text and launch "particles"
   launchSentances();
  
@@ -57,14 +58,19 @@ void launchSentances() {
 }
 
 void update() {
-  cap.loadPixels();
-  
+  // read video feed
+  if(cap.available()) {
+    cap.read(); 
+    cap.loadPixels();
+  }
+
   for(int i=0;i<LetterList.size();i++) {
      Letter l = LetterList.get(i);
+     // if the letter is not colliding continue down
      if(!isColliding(l.pos))
        l.pos.add(l.vel);
  
-     // if you reach the bottom, go at the top
+     // if we reach the bottom, go at the top again
      if(l.pos.y > height) {
        l.pos.y -= height+letterYOffset;
      }
@@ -100,10 +106,6 @@ void draw() {
        }
   }
 
-}
-
-void captureEvent(Capture c) {
-  c.read();  
 }
 
 
